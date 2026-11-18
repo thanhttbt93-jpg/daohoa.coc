@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thanhttbt93-jpg.github.io/daohoa.coc/sitemap.xml
