@@ -30,6 +30,27 @@ button:disabled{opacity:.6}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 #thanks{display:none}
 .req{color:var(--accent)}
+.stick{background:var(--bg);border:1px dashed var(--accent);border-radius:12px;padding:16px;margin:12px 0;min-height:120px}
+.stick .so{font-size:.8rem;color:var(--muted);margin:0}
+.stick .lv{font-size:1.05rem;font-weight:700;color:var(--accent);margin:4px 0 10px}
+.stick .han{white-space:pre-line;font-weight:600;margin:0 0 8px}
+.stick .pa{font-style:italic;color:var(--muted);margin:0 0 8px}
+.stick .dn,.stick .la{margin:0 0 8px;font-size:.95rem}
+#xinBtn{width:auto;display:flex;flex-direction:column;align-items:center;gap:6px;margin:8px auto 0;padding:8px 16px;background:none;border:1px dashed var(--accent);border-radius:14px;color:var(--text)}
+#xinBtn span{font-weight:600;color:var(--accent)}
+#hu.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(6deg)}}
+.keo-wrap{display:flex;justify-content:center;gap:28px;margin:14px 0}
+.keo3d{width:120px;height:70px;perspective:600px;filter:drop-shadow(0 8px 6px rgba(0,0,0,.55))}
+.keo-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transform:rotateX(0deg)}
+.keo-inner.flat{transform:rotateX(180deg)}
+.keo-inner.toss{animation:keoSpin .8s ease-in-out forwards}
+@keyframes keoSpin{0%{transform:translateY(0) rotateX(var(--start))}50%{transform:translateY(-40px) rotateX(calc((var(--start) + var(--end)) / 2))}100%{transform:translateY(0) rotateX(var(--end))}}
+.face{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.face.back{transform:rotateX(180deg)}
+#kqText{min-height:3em;margin:8px 0 12px}
+#kqText strong{color:var(--accent)}
+#tungBtn{width:auto;padding:12px 24px;margin:0 auto;display:block}
 footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:24px}
 </style>
 </head>
@@ -88,7 +109,73 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:24px}
 <label class="check"><input type="checkbox" required> Tôi đồng ý cung cấp thông tin trên để lập quẻ, và hiểu nội dung chỉ mang tính tham khảo, giải trí.</label>
 <button type="submit">Gửi thông tin</button>
 </form>
-<div id="thanks"><p>Cảm ơn bạn đã gửi câu hỏi. Mình sẽ xem và chọn những câu phù hợp để bóc quẻ.</p></div>
+<div id="thanks"><p>Cảm ơn bạn đã gửi thông tin. Mình sẽ lập quẻ và phản hồi.</p></div>
+</section>
+
+<section id="xinxam">
+<h2>Quẻ xăm đào hoa</h2>
+<p>Lắng lòng, nghĩ về điều bạn đang băn khoăn rồi bấm xin xăm.</p>
+<div class="stick" id="stick"><p class="note">Bạn chưa xin xăm.</p></div>
+<button type="button" id="xinBtn">
+<svg id="hu" viewBox="0 0 120 140" width="84" height="98" aria-hidden="true">
+  <rect x="38" y="8" width="6" height="48" rx="2" fill="#e8c28a" transform="rotate(-12 41 56)"/>
+  <rect x="52" y="2" width="6" height="54" rx="2" fill="#f0d9a6"/>
+  <rect x="66" y="8" width="6" height="48" rx="2" fill="#e8c28a" transform="rotate(12 69 56)"/>
+  <rect x="34" y="6" width="6" height="8" rx="2" fill="#e8577a" transform="rotate(-12 37 10)"/>
+  <rect x="52" y="0" width="6" height="8" rx="2" fill="#e8577a"/>
+  <rect x="70" y="6" width="6" height="8" rx="2" fill="#e8577a" transform="rotate(12 73 10)"/>
+  <path d="M28 50 H92 L98 130 Q98 138 90 138 H30 Q22 138 22 130 Z" fill="#8b2e3f"/>
+  <rect x="24" y="44" width="72" height="12" rx="4" fill="#5c1d29"/>
+  <circle cx="60" cy="95" r="14" fill="#f7c6d2"/>
+  <circle cx="60" cy="95" r="5" fill="#e8577a"/>
+  <rect x="30" y="62" width="60" height="3" fill="#c9a24a" opacity=".7"/>
+  <rect x="30" y="122" width="60" height="3" fill="#c9a24a" opacity=".7"/>
+</svg>
+<span>Xin xăm</span>
+</button>
+<p class="note">Xăm chỉ mang tính giải trí và tham khảo.</p>
+</section>
+
+<section id="keo">
+<h2>Xin keo âm dương</h2>
+<p>Trong đầu hãy nghĩ một câu hỏi có/không, rồi bấm tung keo.</p>
+<div class="keo-wrap">
+<div class="keo3d"><div class="keo-inner" id="k1">
+<svg class="face front" viewBox="0 0 120 70" aria-hidden="true">
+<defs><radialGradient id="rf1" cx="40%" cy="30%" r="75%"><stop offset="0%" stop-color="#f7dcab"/><stop offset="45%" stop-color="#c8864a"/><stop offset="100%" stop-color="#5a2e12"/></radialGradient></defs>
+<path d="M6 64 A54 54 0 0 1 114 64 Z" fill="url(#rf1)" stroke="#3d1d0b" stroke-width="1.5"/>
+<ellipse cx="44" cy="30" rx="18" ry="6" fill="#fff" opacity=".35"/>
+<path d="M22 52 Q60 40 98 52" fill="none" stroke="#3d1d0b" stroke-width="1" opacity=".25"/>
+<path d="M30 44 Q60 34 90 44" fill="none" stroke="#3d1d0b" stroke-width="1" opacity=".2"/>
+</svg>
+<svg class="face back" viewBox="0 0 120 70" aria-hidden="true">
+<defs><linearGradient id="lb1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f3d196"/><stop offset="55%" stop-color="#b87636"/><stop offset="100%" stop-color="#6a3514"/></linearGradient></defs>
+<path d="M6 64 L114 64 L114 14 Q114 6 106 6 L14 6 Q6 6 6 14 Z" fill="url(#lb1)" stroke="#3d1d0b" stroke-width="1.5"/>
+<rect x="12" y="10" width="96" height="3" rx="1.5" fill="#fff" opacity=".3"/>
+<path d="M14 30 Q60 24 106 30" fill="none" stroke="#3d1d0b" stroke-width="1" opacity=".22"/>
+<path d="M14 46 Q60 40 106 46" fill="none" stroke="#3d1d0b" stroke-width="1" opacity=".22"/>
+</svg>
+</div></div>
+<div class="keo3d"><div class="keo-inner" id="k2">
+<svg class="face front" viewBox="0 0 120 70" aria-hidden="true">
+<defs><radialGradient id="rf2" cx="40%" cy="30%" r="75%"><stop offset="0%" stop-color="#f7dcab"/><stop offset="45%" stop-color="#c8864a"/><stop offset="100%" stop-color="#5a2e12"/></radialGradient></defs>
+<path d="M6 64 A54 54 0 0 1 114 64 Z" fill="url(#rf2)" stroke="#3d1d0b" stroke-width="1.5"/>
+<ellipse cx="44" cy="30" rx="18" ry="6" fill="#fff" opacity=".35"/>
+<path d="M22 52 Q60 40 98 52" fill="none" stroke="#3d1d0b" stroke-width="1" opacity=".25"/>
+<path d="M30 44 Q60 34 90 44" fill="none" stroke="#3d1d0b" stroke-width="1" opacity=".2"/>
+</svg>
+<svg class="face back" viewBox="0 0 120 70" aria-hidden="true">
+<defs><linearGradient id="lb2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f3d196"/><stop offset="55%" stop-color="#b87636"/><stop offset="100%" stop-color="#6a3514"/></linearGradient></defs>
+<path d="M6 64 L114 64 L114 14 Q114 6 106 6 L14 6 Q6 6 6 14 Z" fill="url(#lb2)" stroke="#3d1d0b" stroke-width="1.5"/>
+<rect x="12" y="10" width="96" height="3" rx="1.5" fill="#fff" opacity=".3"/>
+<path d="M14 30 Q60 24 106 30" fill="none" stroke="#3d1d0b" stroke-width="1" opacity=".22"/>
+<path d="M14 46 Q60 40 106 46" fill="none" stroke="#3d1d0b" stroke-width="1" opacity=".22"/>
+</svg>
+</div></div>
+</div>
+<p id="kqText" class="note">Bạn chưa tung keo.</p>
+<button type="button" id="tungBtn">Tung keo</button>
+<p class="note">Keo chỉ mang tính giải trí và tham khảo. Hãy hỏi câu có/không để keo trả lời rõ ràng.</p>
 </section>
 
 <section>
@@ -98,6 +185,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:24px}
 
 <footer>Đào Hoa Cốc</footer>
 </div>
+
 <script>
 document.getElementById('f').addEventListener('submit', async function (e) {
   e.preventDefault();
@@ -117,10 +205,117 @@ document.getElementById('f').addEventListener('submit', async function (e) {
     document.getElementById('thanks').style.display = 'block';
   } catch (err) {
     btn.disabled = false;
-    btn.textContent = 'Gửi câu hỏi';
+    btn.textContent = 'Gửi thông tin';
     alert('Gửi chưa thành công, bạn thử lại sau nhé.');
   }
 });
+</script>
+
+<script>
+(function () {
+  const XAM = [
+    { n: 1, lv: "Thượng Thượng", han: "雲 開 月 現 光 芒 照，\n萬 里 江 山 錦 繡 春", pa: "Vân khai nguyệt hiện quang mang chiếu, vạn lý giang sơn cẩm tú xuân.", dn: "Mây tan trăng hiện ánh hào quang chiếu rạng, muôn dặm giang sơn gấm vóc mùa xuân.", la: "Thời cơ lớn đã đến, hãy mạnh dạn triển khai mọi kế hoạch dài hạn, thành công rực rỡ nằm trong tầm tay." },
+    { n: 2, lv: "Thượng Thượng", han: "鳳 閣 龍 庭 捷 奏 高，\n南 天 欣 喜 遇 英 豪", pa: "Phượng các long đình tiệp tấu cao, Nam thiên hân hỉ ngộ anh hào.", dn: "Lầu phượng sân rồng tin mừng báo tiệp, trời Nam hân hoan gặp gỡ bậc anh tài.", la: "Quý nhân phù trợ đang ở ngay cạnh, hãy tận dụng mối quan hệ để bứt phá." },
+    { n: 3, lv: "Thượng Thượng", han: "魚 跳 龍 門 運 勢 興，\n登 高 遠 望 萬 貞 通", pa: "Ngư khiêu long môn vận thế hưng, đăng cao viễn vọng vạn trinh thông.", dn: "Cá nhảy vũ môn vận thế hưng thịnh, lên cao nhìn xa muôn sự hanh thông.", la: "Thiên thời địa lợi nhân hòa, hãy dũng cảm đón nhận thử thách lớn để thăng tiến." },
+    { n: 4, lv: "Thượng Thượng", han: "春 風 得 意 馬 蹄 疾，\n一 舉 成 名 天 下 知", pa: "Xuân phong đắc ý mã đề tật, nhất cử thành danh thiên hạ tri.", dn: "Gió xuân đắc ý vó ngựa phi nhanh, một bước thành danh thiên hạ đều biết.", la: "Giữ vững tinh thần quyết liệt, quả ngọt sau bao ngày nỗ lực đã đến lúc thu hoạch." },
+    { n: 5, lv: "Thượng Thượng", han: "金 烏 出 海 照 光 輝，\n百 事 祥 和 萬 物 生", pa: "Kim ô xuất hải chiếu quang huy, bách sự tường hòa vạn vật sinh.", dn: "Quạ vàng (mặt trời) ra biển chiếu ánh hào quang, trăm việc hòa hợp vạn vật sinh sôi.", la: "Sự nghiệp và tài lộc đang trên đà đỉnh cao, hãy chia sẻ thành quả để củng cố nền tảng bền vững." },
+    { n: 6, lv: "Thượng Thượng", han: "桃 花 欣 笑 迎 東 風，\n富 貴 榮 華 運 興 隆", pa: "Đào hoa hân tiếu nghênh đông phong, phú quý vinh hoa vận hưng long.", dn: "Hoa đào cười tươi đón gió đông, phú quý vinh hoa vận hội hưng thịnh.", la: "Cứ tự tin bước đi trên con đường đã chọn, may mắn và tài lộc sẽ tự khắc tìm đến." },
+    { n: 7, lv: "Thượng Cát", han: "松 柏 清 高 傲 雪 霜，\n秉 然 守 信 立 綱 常", pa: "Tùng bách thanh cao ngạo tuyết sương, bính nhiên thủ tín lập cương thường.", dn: "Cây tùng cây bách thanh cao ngạo nghễ sương tuyết, ngay thẳng giữ chữ tín dựng lập nền nếp.", la: "Kiên định với nguyên tắc và đạo đức nghề nghiệp, thành công sẽ đến bằng sự nỗ lực chân chính." },
+    { n: 8, lv: "Thượng Cát", han: "好 花 不 獨 開 無 主，\n笑 傲 東 風 自 在 行", pa: "Hảo hoa bất độc khai vô chủ, tiếu ngạo đông phong tự tại hành.", dn: "Hoa đẹp không chỉ nở vô chủ, thảnh thơi ngạo nghễ đón gió đông mà đi.", la: "Biết chia sẻ cơ hội với tập thể, bạn sẽ đi đường dài một cách an nhiên và vững chắc." },
+    { n: 9, lv: "Thượng Cát", han: "航 海 順 風 波 浪 靜，\n前 途 萬 里 寸 心 清", pa: "Hàng hải thuận phong ba lãng tĩnh, tiền đồ vạn lý thốn tâm thanh.", dn: "Ra khơi gặp gió thuận sóng yên lặng, tương lai muôn dặm lòng trong trẻo thanh thản.", la: "Công việc đang tiến triển suôn sẻ, hãy giữ cái đầu lạnh và trái tim ấm nóng." },
+    { n: 10, lv: "Thượng Cát", han: "竹 密 不 碍 清 風 度，\n山 高 自 有 婉 轉 泉", pa: "Trúc mật bất ngại thanh phong độ, sơn cao tự hữu uyển chuyển tuyền.", dn: "Trúc dày không cản được gió mát, núi cao tự khắc có suối uốn lượn chảy.", la: "Linh hoạt ứng biến trước mọi hoàn cảnh, mềm mỏng nhưng kiên định sẽ giúp bạn vượt qua rào cản nhỏ." },
+    { n: 11, lv: "Thượng Cát", han: "知 足 常 樂 心 自 在，\n淡 泊 以 明 志 遠 方", pa: "Tri túc thường lạc tâm tự tại, đạm bạc dĩ minh chí viễn phương.", dn: "Biết đủ thường vui lòng tự tại, sống đạm bạc để sáng tỏ chí hướng chốn xa.", la: "Đừng tham vọng thứ ngoài tầm với, trân trọng hiện tại là chìa khóa của hạnh phúc và tài lộc ổn định." },
+    { n: 12, lv: "Thượng Cát", han: "積 善 家 風 余 慶 餘，\n平 安 無 事 閱 玄 書", pa: "Tích thiện gia phong dư khánh dư, bình an vô sự duyệt huyền thư.", dn: "Nếp nhà tích đức ơn phúc dư dật, bình an vô sự đọc sách hiền.", la: "Làm việc thiện và giữ tâm sáng sẽ tạo phước đức lớn cho tương lai của chính bạn." },
+    { n: 13, lv: "Trung Cát", han: "求 謀 不 必 心 急 切，\n時 到 自 然 水 到 渠", pa: "Cầu mưu bất tất tâm cấp thiết, thời đáo tự nhiên thủy đáo cừ.", dn: "Tính toán mưu sự không cần quá nôn nóng, thời đến tự khắc nước chảy thành mương.", la: "Kiên nhẫn chờ thời điểm thích hợp, dục tốc bất đạt, hãy củng cố nội lực trước." },
+    { n: 14, lv: "Trung Cát", han: "水 清 無 魚 忍 耐 吉，\n有 緣 千 里 會 相 逢", pa: "Thủy thanh vô ngư nhẫn nại cát, hữu duyên thiên lý hội tương phùng.", dn: "Nước trong không có cá, kiên nhẫn thì tốt; có duyên nghìn dặm ắt sẽ hội ngộ.", la: "Cần uyển chuyển và linh hoạt hơn trong cách ứng xử, đừng quá cứng nhắc mà mất cơ hội." },
+    { n: 15, lv: "Trung Cát", han: "慎 言 敏 行 無 災 禍，\n守 舊 安 常 福 自 來", pa: "Thận ngôn mẫn hành vô tai họa, thủ cựu an thường phúc tự lai.", dn: "Cẩn trọng lời nói, nhanh nhẹn hành động thì không tai họa, giữ nếp cũ an phận phúc tự khắc đến.", la: "Nên thủ thế, làm tốt việc hiện tại thay vì mạo hiểm đầu tư lớn." },
+    { n: 16, lv: "Trung Cát", han: "前 途 風 雨 無 須 慮，\n後 運 光 明 萬 事 興", pa: "Tiền đồ phong vũ vô tu lự, hậu vận quang minh vạn sự hưng.", dn: "Đường trước mưa gió cũng không cần lo lắng, hậu vận sáng sủa muôn việc hưng thịnh.", la: "Khó khăn trước mắt chỉ là thử thách tạm thời, kiên trì vượt qua sẽ đón kết quả tốt đẹp." },
+    { n: 17, lv: "Trung Cát", han: "撥 雲 見 日 乾 坤 大，\n力 行 善 事 禍 消 亡", pa: "Bát vân kiến nhật càn khôn đại, lực hành thiện sự họa tiêu vong.", dn: "Vạch mây thấy mặt trời càn khôn rộng lớn, dốc lòng làm việc thiện thì tai họa tiêu tan.", la: "Giữ vững lòng tin và tích cực hành thiện, cục diện khó khăn sẽ sớm được tháo gỡ." },
+    { n: 18, lv: "Trung Cát", han: "木 有 根 深 枝 茂 盛，\n水 有 源 長 流 不 窮", pa: "Mộc hữu căn thâm chi mậu thịnh, thủy hữu nguyên trường lưu bất cùng.", dn: "Cây có rễ sâu cành lá mới tươi tốt, nước có nguồn dài dòng nước mới không cạn.", la: "Tập trung đầu tư vào gốc rễ (kiến thức, nền tảng, sức khỏe) thay vì hình thức bên ngoài." },
+    { n: 19, lv: "Trung Hạ", han: "虎 落 平 陽 被 犬 欺，\n慎 言 敏 行 莫 驕 矜", pa: "Hổ lạc bình dương bị khuyển khi, thận ngôn mẫn hành mạc kiêu căng.", dn: "Hổ sa cơ lỡ vận bị chó khinh, cẩn lời nói kỹ hành động chớ có kiêu căng.", la: "Đang ở thế yếu, hãy nhẫn nhịn, ẩn mình chờ thời và tránh xung đột trực diện." },
+    { n: 20, lv: "Trung Hạ", han: "船 行 暗 礁 風 波 險，\n謹 慎 持 家 莫 遠 遊", pa: "Thuyền hành ám tiêu phong ba hiểm, cẩn thận trì gia mạc viễn du.", dn: "Thuyền đi gặp đá ngầm sóng gió hiểm trở, cẩn thận giữ nhà chớ nên đi xa.", la: "Tránh đầu tư mạo hiểm hay đi xa trong giai đoạn này, ưu tiên sự an toàn." },
+    { n: 21, lv: "Trung Hạ", han: "競 走 不 如 婉 轉 道，\n欲 速 不 達 禍 隨 身", pa: "Cạnh tẩu bất như uyển chuyển đạo, dục tốc bất đạt họa tùy thân.", dn: "Chạy đua không bằng đi đường uyển chuyển, nóng vội không đạt mục đích mà họa mang vào thân.", la: "Bình tĩnh nhìn lại sách lược, không nên hấp tấp quyết định việc quan trọng lúc này." },
+    { n: 22, lv: "Trung Hạ", han: "草 木 驚 風 霜 雪 壓，\n坐 觀 成 敗 是 非 多", pa: "Thảo mộc kinh phong sương tuyết áp, tọa quan thành bại thị phi đa.", dn: "Cỏ cây hoảng sợ vì sương tuyết đè nặng, ngồi nhìn thành bại thị phi rất nhiều.", la: "Đứng ngoài vòng tranh chấp, bớt nói lại nghe nhiều hơn để tránh vạ miệng." },
+    { n: 23, lv: "Trung Hạ", han: "夜 行 莫 問 天 地 路，\n慎 防 小 人 暗 箭 傷", pa: "Dạ hành mạc vấn thiên địa lộ, thận phòng tiểu nhân ám tiễn thương.", dn: "Đi đêm chớ hỏi đường trời đất, hãy đề phòng tiểu nhân bắn mũi tên lén.", la: "Bảo mật thông tin cá nhân và kế hoạch, đề cao cảnh giác với những người bề ngoài xởi lởi." },
+    { n: 24, lv: "Trung Hạ", han: "金 錢 如 水 來 去 易，\n智 慧 不 堅 事 難 成", pa: "Kim tiền như thủy lai khứ dịch, trí tuệ bất kiên sự nan thành.", dn: "Tiền bạc như nước đến rồi đi dễ dàng, trí tuệ không kiên định việc khó thành.", la: "Quản lý tài chính chặt chẽ, tránh hao tài tốn của vào những khoản đầu tư may rủi." },
+    { n: 25, lv: "Trung Hạ", han: "風 波 無 情 船 孤 獨，\n自 立 自 強 度 危 難", pa: "Phong ba vô tình thuyền cô độc, tự lập tự cường độ nguy nan.", dn: "Sóng gió vô tình thuyền đơn độc, tự lập tự cường mới qua được hiểm nguy.", la: "Đừng trông chờ vào người khác, nghị lực của chính bạn là cứu cánh lúc này." },
+    { n: 26, lv: "Hạ Hạ", han: "落 花 無 情 水 自 流，\n前 途 困 頓 莫 求 謀", pa: "Lạc hoa vô tình thủy tự lưu, tiền đồ khốn đốn mạc cầu mưu.", dn: "Hoa rơi vô tình nước cứ trôi, đường đời khốn đốn chớ nên cầu mưu tính kế lớn.", la: "Tạm gác lại những dự định lớn, tập trung bảo toàn lực lượng và chờ thời cơ mới." },
+    { n: 27, lv: "Hạ Hạ", han: "兵 兇 戰 危 多 損 失，\n坐 守 草 庵 獨 自 愁", pa: "Binh hung chiến nguy đa tổn thất, tọa thủ thảo am độc tự sầu.", dn: "Binh đao hung hiểm chiến tranh tổn thất nhiều, ngồi trong am cỏ một mình tự sầu muộn.", la: "Tránh mọi tranh chấp, kiện tụng hay xung đột pháp lý; nhường bước lúc này là khôn ngoan nhất." },
+    { n: 28, lv: "Hạ Hạ", han: "苟 且 行 事 多 禍 患，\n心 神 不 定 事 難 成", pa: "Cẩu thả hành sự đa họa hoạn, tâm thần bất định sự nan thành.", dn: "Làm việc cẩu thả sinh nhiều họa hoạn, tâm thần bất định việc khó thành công.", la: "Phải cực kỳ tỉnh táo, chớ để cảm xúc chi phối dẫn đến những sai lầm nghiêm trọng." },
+    { n: 29, lv: "Hạ Hạ", han: "霜 降 凄 涼 秋 草 木，\n孤 燈 寂 寞 夜 堪 長", pa: "Sương giáng thê lương thu thảo mộc, cô đăng tịch mịch dạ kham trường.", dn: "Sương rơi thê điều cỏ cây mùa thu, ngọn đèn cô độc tịch mịch đêm canh dài.", la: "Chấp nhận thực tế khó khăn hiện tại, giữ tâm lý kiên cường để vượt qua giai đoạn cô đơn này." },
+    { n: 30, lv: "Hạ Hạ", han: "欲 渡 滄 海 無 船 艦，\n望 天 長 嘆 運 不 逢", pa: "Dục độ thương hải vô thuyền hạm, vọng thiên trường thán vận bất phùng.", dn: "Muốn vượt biển lớn mà không có thuyền ghe, ngửa mặt lên trời thở dài vì lỡ vận.", la: "Đừng liều lĩnh lao vào những việc thiếu điều kiện chuẩn bị, hãy lùi một bước để chờ." },
+    { n: 31, lv: "Hạ Hạ", han: "禍 不 單 行 逢 無 敵，\n有 口 難 言 鬱 恨 深", pa: "Họa bất đơn hành phùng vô địch, hữu khẩu nan ngôn uất hận thâm.", dn: "Họa chẳng đến một lần lại gặp đối thủ mạnh, có miệng khó nói nỗi uất hận sâu sắc.", la: "Giữ cái đầu lạnh, nhẫn nhục qua giông bão, đừng than trách hay đôi co gây thêm họa." },
+    { n: 32, lv: "Hạ Hạ", han: "迷 途 知 返 頭 是 岸，\n莫 恃 強 權 禍 自 知", pa: "Mê đồ tri phản đầu thị ngạn, mạc thị cường quyền họa tự tri.", dn: "Lạc đường biết quay đầu là bờ, chớ cậy quyền thế mà tự rước họa vào thân.", la: "Kịp thời dừng lại những việc sai lầm hoặc rủi ro, sống khiêm nhường để tai qua nạn khỏi." },
+    { n: 33, lv: "Hạ Hạ", han: "黑 雲 壓 頂 天 地 暗，\n待 得 雲 開 霽 日 光", pa: "Hắc vân áp đỉnh thiên địa ám, đãi đắc vân khai tễ nhật quang.", dn: "Mây đen áp đỉnh trời đất tối sầm, hãy đợi đến khi mây tan rọi ánh nắng vàng.", la: "Mọi tăm tối rồi sẽ qua đi nếu bạn giữ vững lòng tin, kiên nhẫn là chiếc khiên tốt nhất lúc này." },
+    { n: 34, lv: "Hạ Hạ", han: "鳥 飛 木 落 深 山 冷，\n萬 事 皆 空 淚 滿 長", pa: "Điểu phi mộc lạc thâm sơn lãnh, vạn sự giai không lệ mãn trường.", dn: "Chim bay cây rụng chốn núi sâu lạnh lẽo, vạn sự đều không nước mắt đầm đìa.", la: "Buông bỏ ảo tưởng và tiếc nuối quá khứ, bắt đầu xây dựng lại với tâm thế vững vàng hơn." }
+  ];
+
+  const btn = document.getElementById('xinBtn');
+  const box = document.getElementById('stick');
+
+  function line(cls, text) {
+    const p = document.createElement('p');
+    p.className = cls;
+    p.textContent = text;
+    return p;
+  }
+
+  btn.addEventListener('click', function () {
+    const hu = document.getElementById('hu');
+    hu.classList.remove('shake');
+    void hu.offsetWidth;
+    hu.classList.add('shake');
+    setTimeout(show, 450);
+  });
+
+  function show() {
+    const x = XAM[Math.floor(Math.random() * XAM.length)];
+    box.textContent = '';
+    const han = line('han', x.han);
+    box.append(
+      line('so', 'Quẻ xăm đào hoa · Bài ' + x.n),
+      line('lv', x.lv),
+      han,
+      line('pa', x.pa),
+      line('dn', 'Nghĩa: ' + x.dn),
+      line('la', 'Lời khuyên: ' + x.la)
+    );
+    btn.querySelector('span').textContent = 'Xin lại';
+  }
+})();
+</script>
+<script>
+(function () {
+  const blocks = [document.getElementById('k1'), document.getElementById('k2')];
+  const btn = document.getElementById('tungBtn');
+  const out = document.getElementById('kqText');
+  const KQ = {
+    thanh: { t: "Thánh keo (một mặt tròn, một mặt phẳng ngửa lên)", d: "Được, đồng ý, thuận lợi. Có thể tiến hành." },
+    am: { t: "Âm keo (cả hai mặt phẳng ngửa lên)", d: "Không, chưa phải lúc. Nên dừng lại hoặc đổi hướng." },
+    tieu: { t: "Tiếu keo (cả hai mặt tròn ngửa lên)", d: "Chưa rõ ràng, hoặc còn điều gì đó chưa nói ra. Hãy suy nghĩ thêm rồi hỏi lại câu rõ hơn." }
+  };
+
+  btn.addEventListener('click', function () {
+    btn.disabled = true;
+    const flats = [Math.random() < 0.5, Math.random() < 0.5]; // true = mặt phẳng ngửa lên
+    blocks.forEach(function (k, i) {
+      k.style.setProperty('--start', k.classList.contains('flat') ? '180deg' : '0deg');
+      k.style.setProperty('--end', flats[i] ? '900deg' : '720deg');
+      k.classList.add('toss');
+    });
+    setTimeout(function () {
+      blocks.forEach(function (k, i) {
+        k.classList.remove('toss');
+        k.classList.toggle('flat', flats[i]);
+      });
+      const a = flats[0], b = flats[1];
+      const r = (a && b) ? 'am' : (!a && !b) ? 'tieu' : 'thanh';
+      out.textContent = KQ[r].t + ': ' + KQ[r].d;
+      btn.disabled = false;
+      btn.textContent = 'Tung lại';
+    }, 800);
+  });
+})();
 </script>
 </body>
 </html>
